@@ -1,0 +1,112 @@
+.container-title {
+    margin: 1em;
+    align-self: center;
+}
+
+.song-result {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: solid 3px white;
+    border-radius: 15px;
+    padding: clamp(.8em, 2vh, 3em) clamp(1em, 2vw, 2em);
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 1em;
+    width: clamp(15em, 60vw, 55em);
+    min-width: fit-content;
+}
+
+.song-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 0em clamp(1em, 2vw, 2em);
+}
+
+.title-artist {
+    flex: 2;
+    line-height: 1.2em;
+}
+
+h1 {
+    line-height: normal;
+    margin: 0;
+}
+
+h3 {
+    font-weight:300;
+    margin: 0;
+    font-size: .6em;
+}
+
+.date-genre {
+    display: flex;
+    /* padding: 0em clamp(1em, 2vw, 2em); */
+    font-size: .5em;
+}
+
+.date-genre .badge {
+    border: solid 1.5px white;
+    border-radius: 15px;
+    padding: 0px 8px;
+    /* line-height: 0px; */
+    background-color: white;
+    color: rgb(40,44,52);
+    font-size: 1.2em;
+    font-weight: 300;
+    margin-right: 1em;
+}
+
+.favoriteBtn {
+    font-size: clamp(1em, 10vw, 2.1em);
+    background: none;
+    border: none;
+    filter: grayscale(100%);
+    cursor: pointer;
+    transition: ease-in .1s;
+    margin-bottom: 3px;
+}
+
+.favoriteBtn:focus {
+    outline: none
+}
+
+.favoriteBtn:hover{
+    transform: rotate(25deg);
+}
+
+.button-container {
+    display: flex;
+    /* justify-content: space-between;
+    flex:.3; */
+    min-width: auto;
+}
+
+.btn {
+    padding: 0 !important;
+}
+
+.spotify-button {
+    background-color: #0000ff00;
+    border: none;
+    width: clamp(3em, 10vw, 4.2em);
+    cursor: pointer;
+    transition: ease-in-out .2s;
+    margin-right: 2.4em;
+    transform: scale(1.2);
+}
+
+.spotify-button:hover {
+    transform: scale(1.1);
+}
+.spotify-button:focus {
+    transform: scale(1.1);
+    outline: none;
+}
+
+.spotify-button .spotify-svg path {
+    fill: rgb(29,208,92);
+    filter: grayscale(100%)
+}

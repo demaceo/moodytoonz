@@ -1,0 +1,17 @@
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  width: auto;
+}
+
+.app-name {
+  font-size: 1.5em;
+  font-style: italic;
+  margin-left: -10vw;
+  z-index: 1;
+}
