@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 >[Moody Tunes deployed site](https://brabbuss.github.io/moodytunes/)
+=======
+>[Moody Tunes deployed site](https://demaceo.github.io/moodytunes/)
+>>>>>>> 52ecd0f (update readme)
 
 ---
 
