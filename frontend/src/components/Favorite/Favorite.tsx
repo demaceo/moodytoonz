@@ -16,12 +16,11 @@ const Favorite = ({
   };
 
   const capitalize = (songInfo: string) => {
-    return (
-      songInfo.split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.substring(1))
-      .join(" ")
-    );
-  }
+    return songInfo
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+      .join(" ");
+  };
 
   const searchSpotify = () => {
     let searchParams = `${title}  artist:${artist}`;
@@ -48,7 +47,11 @@ const Favorite = ({
         <button onClick={() => handleClick()} className="remove-fav-btn">
           Remove
         </button>
-        <button onClick={() => searchSpotify()} className="spotify-button" data-testid='spotify'>
+        <button
+          onClick={() => searchSpotify()}
+          className="spotify-button"
+          data-testid="spotify"
+        >
           {spotify}
         </button>
       </div>
