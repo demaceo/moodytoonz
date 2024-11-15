@@ -1,9 +1,12 @@
+//! https://developer.spotify.com/documentation/web-api/reference/get-recommendations
+//! to add min and max for energy, valence, danceability, etc
+
 export const moodsData = [
   {
     mood: 'Sad',
     target_valence: [0, 0.3],
     target_energy: [0.2, 0.4],
-    seed_genres: ['blues', 'indie', 'acoustic', 'r&b', 'soul']
+    seed_genres: ['blues', 'indie', 'acoustic', 'r-n-b', 'soul', 'rainy-day']
   },
   {
     // "mood": [
@@ -14,19 +17,30 @@ export const moodsData = [
     mood: 'Chill',
     target_valence: [0.4, 0.7],
     target_energy: [0.2, 0.5],
-    seed_genres: ['lo-fi', 'ambient', 'chillwave', 'jazz', 'acoustic']
+    seed_genres: ['ambient', 'chill', 'jazz', 'rainy-day', 'acoustic', 'study']
   },
   {
     mood: 'Energetic',
     target_valence: [0.5, 0.8],
     target_energy: [0.7, 1],
-    seed_genres: ['rock', 'punk', 'hip-hop', 'dance', 'edm']
+    seed_genres: [
+      'rock',
+      'punk',
+      'hip-hop',
+      'dubstep',
+      'house',
+      'dance',
+      'electronic',
+      'edm',
+      'work-out',
+      'afrobeat'
+    ]
   },
   {
     mood: 'Amorous',
     target_valence: [0.5, 0.9],
     target_energy: [0.3, 0.6],
-    seed_genres: ['r&b', 'soul', 'pop', 'indie', 'acoustic']
+    seed_genres: ['r-n-b', 'soul', 'pop', 'indie', 'acoustic']
   },
   {
     mood: 'Melancholic',
@@ -52,12 +66,12 @@ export const moodsData = [
     target_energy: [0.2, 0.5],
     seed_genres: ['dream pop', 'ambient', 'shoegaze']
   },
-  {
-    mood: 'Nostalgic',
-    target_valence: [0.5, 0.8],
-    target_energy: [0.3, 0.6],
-    seed_genres: ['80s', '90s', 'vintage', 'acoustic']
-  },
+  // {
+  //   mood: 'Nostalgic',
+  //   target_valence: [0.5, 0.8],
+  //   target_energy: [0.3, 0.6],
+  //   seed_genres: ['80s', '90s', 'vintage', 'acoustic']
+  // },
   {
     mood: 'Adventure',
     target_valence: [0.5, 0.8],
@@ -86,18 +100,26 @@ export const moodsData = [
     mood: 'Peaceful',
     target_valence: [0.4, 0.8],
     target_energy: [0.1, 0.3],
-    seed_genres: ['classical', 'new age', 'ambient', 'world']
+    seed_genres: [
+      'classical',
+      'new age',
+      'ambient',
+      'world',
+      'sleep',
+      'chill',
+      'indie'
+    ]
   },
   {
     mood: 'Hypnotic',
     target_valence: [0.4, 0.7],
     target_energy: [0.4, 0.7],
-    seed_genres: ['techno', 'trance', 'psychedelic', 'lo-fi']
+    seed_genres: ['techno', 'trance', 'sleep']
   },
   {
     mood: 'Spiritual',
     target_valence: [0.6, 0.9],
     target_energy: [0.2, 0.5],
-    seed_genres: ['gospel', 'world music', 'chanting']
+    seed_genres: ['gospel', 'world-music']
   }
 ]
