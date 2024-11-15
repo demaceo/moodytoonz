@@ -1,21 +1,26 @@
 import React, { useEffect } from "react";
 import Result from "../Result/Result";
-import {ResultsViewProps} from '../common/Types'
+import { ResultsViewProps } from "../common/Types";
 
-const ResultsView = ({ addFavorite, songResults, favoriteSongs, moodName }: ResultsViewProps) => {
+const ResultsView = ({
+  addFavorite,
+  songResults,
+  favoriteSongs,
+  moodName,
+}: ResultsViewProps) => {
   useEffect(() => {
-    document.title = `MoodyTunes - Results (${songResults.length})`
-  }, [])
+    document.title = `MoodyTunes - Results (${songResults.length})`;
+  }, [songResults.length]);
 
-  const songs = songResults.map(song => {
+  const songs = songResults.map((song) => {
     return (
       <Result
         key={song.id}
         id={song.id}
-        artist={song.artist_display_name}
-        title={song.title}
-        releaseDate={song.releasedate}
-        genre={song.genre}
+        artist={song["artists"][0].name}
+        name={song["name"]}
+        releaseDate={song.album.release_date}
+        // genre={song.genre}
         favoriteSongs={favoriteSongs}
         addFavorite={addFavorite}
       />
@@ -23,12 +28,10 @@ const ResultsView = ({ addFavorite, songResults, favoriteSongs, moodName }: Resu
   });
   return (
     <section className="results-view">
-      <h2 className="container-title">
-        "{moodName}" song results:
-      </h2>
+      <h2 className="container-title">"{moodName}" song results:</h2>
       {songs}
     </section>
-  )
+  );
 };
 
 export default ResultsView;

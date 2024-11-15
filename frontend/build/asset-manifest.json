@@ -1,14 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.cff9f3e2.css",
-    "main.js": "/static/js/main.909a3bc8.js",
-    "static/media/web-vitals.umd.cjs": "/static/media/web-vitals.umd.af43924bb966674d26f5.cjs",
+    "main.css": "/static/css/main.ea7ef15a.css",
+    "main.js": "/static/js/main.8f77f57f.js",
     "index.html": "/index.html",
-    "main.cff9f3e2.css.map": "/static/css/main.cff9f3e2.css.map",
-    "main.909a3bc8.js.map": "/static/js/main.909a3bc8.js.map"
+    "main.ea7ef15a.css.map": "/static/css/main.ea7ef15a.css.map",
+    "main.8f77f57f.js.map": "/static/js/main.8f77f57f.js.map"
   },
   "entrypoints": [
-    "static/css/main.cff9f3e2.css",
-    "static/js/main.909a3bc8.js"
+    "static/css/main.ea7ef15a.css",
+    "static/js/main.8f77f57f.js"
   ]
 }

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Form from "../Form/Form";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { getTracksByMoodAPI } from "../../utilities/apiCalls";
+import { fetchRecommendations } from "../../utilities/apiRequests";
 import ResultsView from "../ResultsView/ResultsView";
 import FavoritesView from "../FavoritesView/FavoritesView";
-import { ISongResults } from "../common/Types";
+import { ISongResults, MoodData } from "../common/Types";
 import { useLocalStorage } from "../../utilities/useLocalStorage";
 import NavBar from "../NavBar/NavBar";
+import { moodsData } from "../common/moods.js";
 
 function App() {
   const [songResults, setSongResults] = useState([]);
@@ -19,12 +20,27 @@ function App() {
     let storedFavs: any = localStorage;
     storedFavs = storedFavs ? storedFavs : [];
     setFavoriteSongs(storedFavs);
-  }, []);
+  }, [localStorage]);
 
-  const getMoodyTunes = async (mood: string, decade: string) => {
-    const arousal: string = mood.split(",")[0];
-    const valence: string = mood.split(",")[1];
-    const results = await getTracksByMoodAPI(valence, arousal, decade);
+
+  const getGenres = (mood: string) => {
+    const genreList = moodsData.find(
+      (item: MoodData) => item.mood.toLowerCase() === mood.toLowerCase()
+    );
+    // If a mood was found, return its seed_genres; otherwise, return a default message
+    return genreList ? genreList.seed_genres : undefined;
+  };
+
+  const getMoodyTunes = async (mood: string, decade: string, moodName: string) => {
+    const arousal: number = parseInt(mood.split(",")[0]);
+    const valence: number = parseInt(mood.split(",")[1]);
+    const genres: string[] | undefined = getGenres(moodName);
+    const results = await fetchRecommendations(
+      valence,
+      arousal,
+      genres,
+      decade
+    );
     setSongResults(results);
   };
 

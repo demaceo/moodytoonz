@@ -7,7 +7,7 @@ form {
 }
 
 .icon {
-  transition: ease-in-out .2s;
+  transition: ease-in-out 0.2s;
 }
 .icon:hover {
   background-color: orange;
@@ -69,7 +69,6 @@ button a {
   border-radius: 15px;
 }
 
-
 p svg {
   width: 6vw;
   height: 10vh;
@@ -106,7 +105,7 @@ p svg {
   transition: ease-in-out .2s;
   cursor: pointer;
   padding: .5em; */
-/* 
+  /* 
     flex:1;
   padding: .2em .4em;
   height: fit-content;
@@ -120,20 +119,19 @@ p svg {
   border: 3px solid #e100a9;
   background: rgba(80, 80, 80, 0);
   color: #e100a9;
-  transition: ease-in-out .2s;
+  transition: ease-in-out 0.2s;
   cursor: pointer;
-  padding: .8em 1em;
+  padding: 0.8em 1em;
   height: fit-content;
   width: fit-content;
   font-size: clamp(13px, 1em, 2em);
   font-weight: 300;
   border-radius: 10px;
-  
 }
 
 .submit-button-inactive {
-  flex:1;
-  padding: .5em .8em;
+  flex: 1;
+  padding: 0.5em 0.8em;
   height: fit-content;
   width: fit-content;
   /* width: fit-content; */
@@ -143,9 +141,9 @@ p svg {
   background: rgb(80, 80, 80);
   color: #282c34;
   border-radius: 10px;
-  transition: ease-in-out .2s;
-  margin: 0 .6em;
-  
+  transition: ease-in-out 0.2s;
+  margin: 0 0.6em;
+
   /* font-size: 1.8rem; */
   /* font-weight: bolder; */
   /* height: 2em; */
@@ -161,7 +159,8 @@ p svg {
 .submit-button:hover {
   background: #e100a9;
   color: #282c34;
-  border-color: #e100a9;  border-radius: 10px;
+  border-color: #e100a9;
+  border-radius: 10px;
 
   /* border: 1.4px solid rgb(80, 80, 80);
   background: rgb(80, 80, 80);

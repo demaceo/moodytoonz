@@ -6,9 +6,10 @@ import { spotify } from "../../utilities/icons";
 const Favorite = ({
   id,
   artist,
-  title,
+  name,
   releaseDate,
-  genre,
+  // genre,
+  favoriteSongs,
   removeFavorite,
 }: FavoriteProps) => {
   const handleClick = () => {
@@ -23,7 +24,7 @@ const Favorite = ({
   };
 
   const searchSpotify = () => {
-    let searchParams = `${title}  artist:${artist}`;
+    let searchParams = `${name}  artist:${artist}`;
     window.open(`https://open.spotify.com/search/${searchParams}`);
   };
 
@@ -31,7 +32,7 @@ const Favorite = ({
     <article className="favorite" id={id}>
       <div className="fav-details">
         <div className="fav-title-artist">
-          <h1>{capitalize(title)}</h1>
+          <h1>{capitalize(name)}</h1>
           <h3>{capitalize(artist)}</h3>
         </div>
         <div className="fav-date-genre">
@@ -39,7 +40,7 @@ const Favorite = ({
             <b>Release Date:</b> {releaseDate}
           </span>
           <span className={`fav-badge`}>
-            <b>Genre:</b> {capitalize(genre)}
+            {/* <b>Genre:</b> {capitalize(genre)} */}
           </span>
         </div>
       </div>

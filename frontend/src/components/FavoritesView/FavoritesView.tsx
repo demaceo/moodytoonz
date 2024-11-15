@@ -3,24 +3,13 @@ import Favorite from '../Favorite/Favorite';
 import './FavoritesView.css';
 import { arrow } from '../../utilities/icons'; 
 import { Link } from "react-router-dom";
-
-
-interface FavoritesViewProps {
-  favoriteSongs: {
-    id: string,
-    artist_display_name: string,
-    title: string,
-    releasedate: string,
-    genre: string
-  }[];
-  removeFavorite: Function;
-}
+import { FavoritesViewProps } from '../common/Types';
 
 
 const FavoritesView = ({favoriteSongs, removeFavorite}: FavoritesViewProps) => {
   useEffect(() => {
     document.title = `MoodyTunes - Favorites (${favoriteSongs.length})`
-  }, [])
+  }, [favoriteSongs.length])
   
   if (favoriteSongs.length === 0) {
       return (
@@ -35,15 +24,15 @@ const FavoritesView = ({favoriteSongs, removeFavorite}: FavoritesViewProps) => {
     </section>
    );
   } else {
-  const favorites = favoriteSongs.map((fav: any) => {
+  const favorites = favoriteSongs.map((...fav: any) => {
     return (
       <Favorite
         key={`${fav.id}1`}
         id={fav.id}
-        artist={fav.artist_display_name}
-        title={fav.title}
-        releaseDate={fav.releasedate}
-        genre={fav.genre}
+        artist={fav.artist}
+        name={fav.name}
+        releaseDate={fav.releaseDate}
+        // genre={fav.genre}
         favoriteSongs={favoriteSongs}
         removeFavorite={removeFavorite}
       />
