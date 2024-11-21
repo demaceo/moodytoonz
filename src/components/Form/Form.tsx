@@ -114,13 +114,13 @@ const Form = ({ getMoodyTunes, updateMood }: FormProps) => {
         </p>
         <br />
         <div className="form-options decades">
-          {["50", "60", "70", "80", "90", "00", "10"].map((decadeStr) => (
+          {["40", "50", "60", "70", "80", "90", "00", "10", "20"].map((decadeStr) => (
             <p
               key={decadeStr}
               className={`icon ${getStylings(decade, decadeStr)}`}
               onClick={() => setDecade(decadeStr)}
             >
-              {parseInt(decadeStr) <= 10 ? `20${decadeStr}s` : `19${decadeStr}s`}
+              {parseInt(decadeStr) <= 20 ? `20${decadeStr}s` : `19${decadeStr}s`}
             </p>
           ))}
         </div>
