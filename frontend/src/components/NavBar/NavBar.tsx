@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { musicNote } from "../../utilities/icons";
+// import { musicNote } from "../../utilities/icons";
 import "./NavBar.css";
 import React from "react";
 

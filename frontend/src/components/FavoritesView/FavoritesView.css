@@ -1,5 +1,6 @@
 .favorites-view {
   display: flex;
+  width: 80%;
   flex-direction: column;
   align-items: center;
   color: rgb(255, 255, 255);
@@ -18,7 +19,7 @@
 }
 
 .back-arrow svg path:hover {
-    fill: #e100a9;
+  fill: #e100a9;
 }
 
 .back-arrow svg {

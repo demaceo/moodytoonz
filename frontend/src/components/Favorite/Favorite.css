@@ -3,13 +3,15 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     border: solid 3px rgb(253,235,103);
     border-radius: 15px;
     padding: clamp(.8em, 2vh, 3em) clamp(1em, 2vw, 2em);
     transition: all 0.2s ease-in-out;
     margin-bottom: 1em;
     width: clamp(15em, 60vw, 55em);
-    min-width: fit-content;
+    /* min-width: fit-content; */
+    max-width: 85vw;
 }
 
 .favorite:hover {
@@ -28,6 +30,8 @@
   transition: ease-in .1s;
   margin-bottom: .5vh;
   height: 50%;
+  padding: 5px;
+  margin-right: 10px
 }
 
 .remove-fav-btn:hover {
@@ -39,6 +43,13 @@
 .remove-fav-btn:focus {
   outline: none
 }
+
+.fav-song-data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 
 .fav-details {
   display: flex;
@@ -69,6 +80,14 @@
   display: flex;
   font-size: .5em;
 }
+
+.fav-img {
+  width: 4em;
+  height: 4em;
+  border-radius: 15px;
+  opacity: 85%;
+}
+
 
 .fav-date-genre .fav-badge {
   border: solid 1.5px rgb(253,235,103);

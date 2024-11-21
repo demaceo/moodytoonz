@@ -9,6 +9,8 @@ const Favorite = ({
   name,
   releaseDate,
   // genre,
+  url,
+  img,
   favoriteSongs,
   removeFavorite,
 }: FavoriteProps) => {
@@ -28,22 +30,29 @@ const Favorite = ({
     window.open(`https://open.spotify.com/search/${searchParams}`);
   };
 
-  console.log('id', id)
-
   return (
     <article className="favorite" id={id}>
-      <div className="fav-details">
-        <div className="fav-title-artist">
-          <h1>{capitalize(name)}</h1>
-          <h3>{capitalize(artist)}</h3>
-        </div>
-        <div className="fav-date-genre">
-          <span className={`fav-badge`}>
-            <b>Release Date:</b> {releaseDate}
-          </span>
-          {/* <span className={`fav-badge`}>
+      <div className="fav-song-data">
+        <img
+          className="fav-img"
+          src={img}
+          alt="album cover img"
+          id={`img-${id}`}
+          onClick={() => window.open(url)}
+        />
+        <div className="fav-details">
+          <div className="fav-title-artist">
+            <h1>{capitalize(name)}</h1>
+            <h3>{capitalize(artist)}</h3>
+          </div>
+          <div className="fav-date-genre">
+            <span className={`fav-badge`}>
+              <b>Release Date:</b> {releaseDate}
+            </span>
+            {/* <span className={`fav-badge`}>
             <b>Genre:</b> {capitalize(genre)}
           </span> */}
+          </div>
         </div>
       </div>
       <div className="fav-button-container">
@@ -51,7 +60,7 @@ const Favorite = ({
           Remove
         </button>
         <button
-          onClick={() => searchSpotify()}
+          onClick={() => window.open(url)}
           className="spotify-button"
           data-testid="spotify"
         >

@@ -13,6 +13,7 @@ const ResultsView = ({
   }, [songResults.length]);
 
   const songs = songResults.map((song) => {
+    console.log(song)
     return (
       <Result
         key={song.id}
@@ -21,6 +22,8 @@ const ResultsView = ({
         name={song["name"]}
         releaseDate={song.album.release_date}
         // genre={song.genre}
+        url={song.external_urls["spotify"]}
+        img={song.album.images[0]["url"]}
         favoriteSongs={favoriteSongs}
         addFavorite={addFavorite}
       />

@@ -12,6 +12,8 @@ const Result = ({
   name,
   releaseDate,
   // genre,
+  url,
+  img,
   favoriteSongs,
   addFavorite,
 }: ResultProps) => {
@@ -79,10 +81,12 @@ const Result = ({
     }
   };
 
-  const searchSpotify = () => {
-    let searchParams = `${name}  artist:${artist}`;
-    window.open(`https://open.spotify.com/search/${searchParams}`);
-  };
+  // const searchSpotify = (songUrl?: string) => {
+  //   let searchParams = `${name}  artist:${artist}`;
+  //   songUrl
+  //     ? window.open(songUrl)
+  //     : window.open(`https://open.spotify.com/search/${searchParams}`);
+  // };
 
   const capitalize = (songInfo: string) => {
     return songInfo
@@ -93,23 +97,33 @@ const Result = ({
 
   return (
     <article className={`song-result card-${id}`} id={id}>
-      <div className="song-details">
-        <div className={`title-artist title-artist-${id}`}>
-          <h1>{capitalize(name)}</h1>
-          <h3>{capitalize(artist)}</h3>
-        </div>
-        <div className="date-genre">
-          <span className={`badge badge-${id}`}>
-            <b>Release Date:</b> {releaseDate}
-          </span>
-          {/* <span className={`badge badge-${id}`}>
+      <div className="song-data">
+        <img
+          className="song-img"
+          src={img}
+          alt="album cover img"
+          id={`img-${id}`}
+          onClick={() => window.open(url)}
+        />
+
+        <div className="song-details">
+          <div className={`title-artist title-artist-${id}`}>
+            <h1>{capitalize(name)}</h1>
+            <h3>{capitalize(artist)}</h3>
+          </div>
+          <div className="date-genre">
+            <span className={`badge badge-${id}`}>
+              <b>Release Date:</b> {releaseDate}
+            </span>
+            {/* <span className={`badge badge-${id}`}>
             <b>Genre:</b> {capitalize(genre)}
           </span> */}
+          </div>
         </div>
       </div>
       <div className="button-container">
         <button
-          onClick={() => searchSpotify()}
+          onClick={() => window.open(url)}
           className="spotify-button"
           data-testid="spotify"
         >

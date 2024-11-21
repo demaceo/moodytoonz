@@ -84,9 +84,6 @@ export const fetchRecommendations = async (
             maxEnergy,
             seedGenres
         );
-
-        console.log(recommendations)
-
         return recommendations.tracks;
     } catch (error) {
         console.error("Error:", error);

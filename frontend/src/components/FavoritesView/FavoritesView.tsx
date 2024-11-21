@@ -38,6 +38,8 @@ const FavoritesView = ({
           name={fav[0]["name"]}
           releaseDate={fav[0]["album"]["release_date"]}
           // genre={fav.genre}
+          url={fav[0].external_urls["spotify"]}
+          img={fav[0].album.images[0]["url"]}
           favoriteSongs={favoriteSongs}
           removeFavorite={removeFavorite}
         />

@@ -4,8 +4,11 @@ export interface ISongResults {
   id: string,
   name: string,
   artists: Array<{ name: string }>,
-  album: { release_date: string },
+  album: {
+    images: any; release_date: string,
+  },
   releaseDate: string,
+  external_urls: { spotify: string },
   // genre: string
 }
 
@@ -20,24 +23,12 @@ export interface ResultProps {
   id: string;
   artist: string;
   name: string;
-  // album: Object,
   releaseDate: string;
-  // genre: string;
+  url: string,
+  img: string;
   favoriteSongs: Array<ISongResults>;
   addFavorite: Function;
 };
-
-// export interface FavoriteProps {
-//   key: string;
-//   id: string;
-//   artist: string;
-//   name: string;
-//   // album: Object,
-//   releaseDate: string;
-//   // genre: string;
-//   favoriteSongs: Array<ISongResults>;
-//   removeFavorite: Function;
-// };
 
 export interface FavoriteProps {
   key: string;
@@ -46,34 +37,19 @@ export interface FavoriteProps {
   name: string;
   album?: Object; // Optional
   releaseDate?: string; // Optional
+  url: string,
+  img: string;
   favoriteSongs: Array<ISongResults>;
   removeFavorite: Function;
 }
 
 export interface FavoritesViewProps {
-  // favoriteSongs: {
-  //   id: string;
-  //   artists: Array<any>;
-  //   name: string;
-  //   // album: Object,
-  //   // releasedate: string,
-  //   // genre: string
-  // }[];
   favoriteSongs: ISongResults[]
   removeFavorite: Function;
 }
 
 
 export interface ResultsViewProps {
-  // songResults: {
-  //   id: string;
-  //   artists: Array<any>;
-  //   name: string;
-  //   // album: Object,
-
-  //   releaseDate: string;
-  //   // genre: string;
-  // }[];
   songResults: ISongResults[];
   favoriteSongs: ISongResults[];
   addFavorite: Function;
