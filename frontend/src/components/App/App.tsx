@@ -26,27 +26,10 @@ function App() {
     const genreList = moodsData.find(
       (item: MoodData) => item.mood.toLowerCase() === mood.toLowerCase()
     );
-    // If a mood was found, return its seed_genres; otherwise, return a default message
     return genreList ? genreList.seed_genres : undefined;
   };
 
-  // const getMoodyTunes = async (
-  //   mood: string,
-  //   moodName: string
-  // ) => {
-  //   const arousal: number = parseInt(mood.split(",")[0]);
-  //   const valence: number = parseInt(mood.split(",")[1]);
-  //   const genres: string[] | undefined = getGenres(moodName);
-  //   const results = await fetchRecommendations(
-  //     valence,
-  //     arousal,
-  //     genres,
-  //   );
-  //   setSongResults(results);
-  // };
-
   const getMoodyTunes = async (mood: string, moodName: string) => {
-    // Destructure values from the mood string
     const [minValence, maxValence, minEnergy, maxEnergy] = mood
       .split(",")
       .map(Number);
@@ -86,7 +69,6 @@ function App() {
   };
 
   const removeFavorite = (id: string) => {
-    console.log("id", id);
     const favorites = favoriteSongs.filter(
       (song: ISongResults) => song.id !== id
     ) as any;

@@ -1,33 +1,35 @@
-.music-note {
+/* .music-note {
   display: flex;
   flex-direction: row;
   top: .5vh;
   left: 4.2em;
   position: absolute;
-  animation: linear initial alternate;
-  animation-name: run;
-  animation-duration: 2s;
-  width: 4em;
+  width: 2em;
   height: 3.6em;
   opacity: 100%;
+} */
+
+.music-note {
+  /* height: 2.6em; */
+  width: 2em;
 }
 
 .link-container {
   display: flex;
-  width:fit-content;
+  width: fit-content;
 }
 
 .nav-btn {
-  flex:1;
-  padding: .2em .4em;
+  flex: 1;
+  padding: 0.2em 0.4em;
   height: fit-content;
   width: fit-content;
   font-size: clamp(13px, 1em, 2em);
   font-weight: 300;
   border: 1.4px solid white;
   border-radius: 10px;
-  transition: ease-in-out .2s;
-  margin: 0 .6em;
+  transition: ease-in-out 0.2s;
+  margin: 0 0.6em;
 }
 
 .nav-btn-link {
@@ -60,10 +62,12 @@
   font-weight: 300;
 }
 
-.app-name {
-}
-
 .app-name-link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 22%;
   text-decoration: none;
   color: white;
   z-index: 1;

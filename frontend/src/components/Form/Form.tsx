@@ -24,7 +24,7 @@ import {
 const Form = ({ getMoodyTunes, updateMood }: FormProps) => {
   const [mood, setMood] = useState<string | null>(null);
   const [moodName, setMoodName] = useState("");
-  // const [decade, setDecade] = useState("");
+  const [decade, setDecade] = useState("");
 
   const handleClick = () => {
     if (mood) {
@@ -67,7 +67,7 @@ const Form = ({ getMoodyTunes, updateMood }: FormProps) => {
           Please select your <b>Mood</b>:
         </p>
         <br />
-        <div className="form-options">
+        <div className="form-options moods">
           {moodsData.map((item) => (
             <p
               key={item.mood}
@@ -109,8 +109,8 @@ const Form = ({ getMoodyTunes, updateMood }: FormProps) => {
         </div>
         <br />
 
-        {/* <p className="form-subheader">
-          Please select a <b>Decade</b>:
+        <p className="form-subheader">
+          Please select a <b>Decade</b> (<i>optional</i>):
         </p>
         <br />
         <div className="form-options decades">
@@ -120,11 +120,11 @@ const Form = ({ getMoodyTunes, updateMood }: FormProps) => {
               className={`icon ${getStylings(decade, decadeStr)}`}
               onClick={() => setDecade(decadeStr)}
             >
-              {decadeStr === "00" ? "2000s" : `${decadeStr}0s`}
+              {parseInt(decadeStr) <= 10 ? `20${decadeStr}s` : `19${decadeStr}s`}
             </p>
           ))}
         </div>
-        <br /> */}
+        <br />
         <Link className={disableLink()} to="/results">
           <button className={showActive()} onClick={handleClick}>
             Get Songs
