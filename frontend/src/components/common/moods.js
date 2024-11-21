@@ -131,7 +131,7 @@
 // ]
 
 export const moodsData = [
-    {
+  {
     mood: 'Happy',
     target_valence: [0.7, 1],
     target_energy: [0.6, 0.9],
@@ -139,31 +139,26 @@ export const moodsData = [
   },
   {
     mood: 'Sad',
-    target_valence: [0, 0.3],
+    target_valence: [0.0, 0.3],
     target_energy: [0.2, 0.4],
-    seed_genres: ['blues', 'indie', 'acoustic', 'r-n-b', 'soul', 'rainy-day']
+    seed_genres: ['blues', 'indie', 'r-n-b', 'soul', 'rainy-day']
   },
   {
     mood: 'Chill',
     target_valence: [0.4, 0.7],
     target_energy: [0.2, 0.5],
-    seed_genres: ['ambient', 'chill', 'jazz', 'rainy-day', 'acoustic', 'study']
+    seed_genres: ['ambient', 'chill', 'jazz', 'acoustic', 'study']
   },
   {
     mood: 'Excited',
     target_valence: [0.5, 0.8],
     target_energy: [0.7, 1],
     seed_genres: [
-      'rock',
       'punk',
       'hip-hop',
-      'dubstep',
-      'house',
       'dance',
-      'electronic',
       'edm',
       'work-out',
-      'afrobeat'
     ]
   },
   {
@@ -233,7 +228,7 @@ export const moodsData = [
       'chill',
       'indie'
     ]
-  },
+  }
   // {
   //   mood: 'Hypnotic',
   //   target_valence: [0.4, 0.7],
