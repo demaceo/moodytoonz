@@ -30,7 +30,6 @@ const Result = ({
 
   useEffect(() => {
     checkFavoriteStatus();
-    // updateFavoriteStatus()
   }, [checkFavoriteStatus]);
 
   const animateAddFavorite = () => {
@@ -103,9 +102,9 @@ const Result = ({
           <span className={`badge badge-${id}`}>
             <b>Release Date:</b> {releaseDate}
           </span>
-          <span className={`badge badge-${id}`}>
-            {/* <b>Genre:</b> {capitalize(genre)} */}
-          </span>
+          {/* <span className={`badge badge-${id}`}>
+            <b>Genre:</b> {capitalize(genre)}
+          </span> */}
         </div>
       </div>
       <div className="button-container">

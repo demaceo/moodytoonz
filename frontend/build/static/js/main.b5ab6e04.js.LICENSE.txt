@@ -82,3 +82,7 @@
  *
  * @license MIT
  */
+
+//! https://developer.spotify.com/documentation/web-api/reference/get-recommendations
+
+//! to add min and max for energy, valence, danceability, etc

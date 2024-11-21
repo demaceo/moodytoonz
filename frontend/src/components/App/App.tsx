@@ -22,7 +22,6 @@ function App() {
     setFavoriteSongs(storedFavs);
   }, [localStorage]);
 
-
   const getGenres = (mood: string) => {
     const genreList = moodsData.find(
       (item: MoodData) => item.mood.toLowerCase() === mood.toLowerCase()
@@ -31,16 +30,37 @@ function App() {
     return genreList ? genreList.seed_genres : undefined;
   };
 
-  const getMoodyTunes = async (mood: string, decade: string, moodName: string) => {
-    const arousal: number = parseInt(mood.split(",")[0]);
-    const valence: number = parseInt(mood.split(",")[1]);
+  // const getMoodyTunes = async (
+  //   mood: string,
+  //   moodName: string
+  // ) => {
+  //   const arousal: number = parseInt(mood.split(",")[0]);
+  //   const valence: number = parseInt(mood.split(",")[1]);
+  //   const genres: string[] | undefined = getGenres(moodName);
+  //   const results = await fetchRecommendations(
+  //     valence,
+  //     arousal,
+  //     genres,
+  //   );
+  //   setSongResults(results);
+  // };
+
+  const getMoodyTunes = async (mood: string, moodName: string) => {
+    // Destructure values from the mood string
+    const [minValence, maxValence, minEnergy, maxEnergy] = mood
+      .split(",")
+      .map(Number);
+
     const genres: string[] | undefined = getGenres(moodName);
+
     const results = await fetchRecommendations(
-      valence,
-      arousal,
-      genres,
-      decade
+      minValence,
+      maxValence,
+      minEnergy,
+      maxEnergy,
+      genres
     );
+
     setSongResults(results);
   };
 
@@ -66,9 +86,11 @@ function App() {
   };
 
   const removeFavorite = (id: string) => {
+    console.log("id", id);
     const favorites = favoriteSongs.filter(
       (song: ISongResults) => song.id !== id
     ) as any;
+    console.log('favorites', favorites);
     setFavoriteSongs(favorites);
     setLocalStorage(favorites);
   };

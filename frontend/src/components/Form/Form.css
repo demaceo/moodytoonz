@@ -6,9 +6,21 @@ form {
   align-items: center;
 }
 
+/* .icon {
+  transition: ease-in-out 0.2s;
+} */
+
 .icon {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  /* font-size: 2rem; */
+  /* Adjust emoji size */
+  cursor: pointer;
   transition: ease-in-out 0.2s;
 }
+
 .icon:hover {
   background-color: orange;
 }
@@ -20,7 +32,7 @@ form h2 {
   text-align: center;
 }
 
-.form-options {
+/* .form-options {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
@@ -31,6 +43,19 @@ form h2 {
   padding: 5px;
   border: solid 2px;
   cursor: pointer;
+} */
+
+.form-options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 4 columns */
+  width: 70vw;
+  border-radius: 15px;
+  padding: 5px;
+  border: solid 2px;
+  cursor: pointer;
+  gap: 5px; /* Adjust spacing between items */
+  /* margin: 16px 0;  */
+  /* Add some space around the grid */
 }
 
 .form-options p {
@@ -68,6 +93,11 @@ button a {
   padding: 9px;
   border-radius: 15px;
 }
+
+/* .choice {
+  border-color: transparent;
+  background-color: transparent;
+} */
 
 p svg {
   width: 6vw;

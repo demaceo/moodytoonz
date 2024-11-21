@@ -12,7 +12,7 @@ const Favorite = ({
   favoriteSongs,
   removeFavorite,
 }: FavoriteProps) => {
-  const handleClick = () => {
+  const handleClick = (id: string) => {
     removeFavorite(id);
   };
 
@@ -28,6 +28,8 @@ const Favorite = ({
     window.open(`https://open.spotify.com/search/${searchParams}`);
   };
 
+  console.log('id', id)
+
   return (
     <article className="favorite" id={id}>
       <div className="fav-details">
@@ -39,13 +41,13 @@ const Favorite = ({
           <span className={`fav-badge`}>
             <b>Release Date:</b> {releaseDate}
           </span>
-          <span className={`fav-badge`}>
-            {/* <b>Genre:</b> {capitalize(genre)} */}
-          </span>
+          {/* <span className={`fav-badge`}>
+            <b>Genre:</b> {capitalize(genre)}
+          </span> */}
         </div>
       </div>
       <div className="fav-button-container">
-        <button onClick={() => handleClick()} className="remove-fav-btn">
+        <button onClick={() => handleClick(id)} className="remove-fav-btn">
           Remove
         </button>
         <button
