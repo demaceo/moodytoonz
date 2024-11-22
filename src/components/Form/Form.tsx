@@ -110,7 +110,7 @@ const Form = ({ getMoodyTunes, updateMood }: FormProps) => {
         <br />
 
         <p className="form-subheader">
-          Please select a <b>Decade</b> (<i>optional</i>):
+          Please select a <b>Decade</b> <i>(optional)</i>:
         </p>
         <br />
         <div className="form-options decades">
