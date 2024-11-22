@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/moodytoonz/static/css/main.e8320054.css",
-    "main.js": "/moodytoonz/static/js/main.b2c7781c.js",
+    "main.js": "/moodytoonz/static/js/main.e529d584.js",
     "index.html": "/moodytoonz/index.html",
     "main.e8320054.css.map": "/moodytoonz/static/css/main.e8320054.css.map",
-    "main.b2c7781c.js.map": "/moodytoonz/static/js/main.b2c7781c.js.map"
+    "main.e529d584.js.map": "/moodytoonz/static/js/main.e529d584.js.map"
   },
   "entrypoints": [
     "static/css/main.e8320054.css",
-    "static/js/main.b2c7781c.js"
+    "static/js/main.e529d584.js"
   ]
 }
