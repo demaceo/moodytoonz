@@ -12,7 +12,8 @@ import { BrowserRouter } from "react-router-dom";
 const root = createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  // <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter basename="/moodytoonz">
     <App />
   </BrowserRouter>
 );
