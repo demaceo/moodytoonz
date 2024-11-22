@@ -25,10 +25,10 @@ const Favorite = ({
       .join(" ");
   };
 
-  const searchSpotify = () => {
-    let searchParams = `${name}  artist:${artist}`;
-    window.open(`https://open.spotify.com/search/${searchParams}`);
-  };
+  // const searchSpotify = () => {
+  //   let searchParams = `${name}  artist:${artist}`;
+  //   window.open(`https://open.spotify.com/search/${searchParams}`);
+  // };
 
   return (
     <article className="favorite" id={id}>

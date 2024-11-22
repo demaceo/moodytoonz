@@ -159,7 +159,7 @@ export const dreamy = (
   </svg>
 )
 
-const adventure = (
+export const adventure = (
   <svg
     aria-hidden='true'
     focusable='false'
@@ -177,7 +177,7 @@ const adventure = (
   </svg>
 )
 
-const dark = (
+export const dark = (
   <svg
     aria-hidden='true'
     focusable='false'
@@ -212,7 +212,7 @@ export const peaceful = (
     ></path>
   </svg>
 )
-const hypnotic = (
+export const hypnotic = (
   <svg
     aria-hidden='true'
     focusable='false'
@@ -229,7 +229,7 @@ const hypnotic = (
     ></path>
   </svg>
 )
-const spiritual = (
+export const spiritual = (
   <svg
     aria-hidden='true'
     focusable='false'
@@ -246,7 +246,7 @@ const spiritual = (
     ></path>
   </svg>
 )
-const surreal = (
+export const surreal = (
   <svg
     aria-hidden='true'
     focusable='false'
