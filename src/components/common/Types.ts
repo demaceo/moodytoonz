@@ -3,19 +3,18 @@
 export interface ISongResults {
   id: string,
   name: string,
-  artists: Array<{ name: string }>,
+  artists: { name: string }[];
   album: {
     images: any; release_date: string,
   },
-  releaseDate: string,
+  // releaseDate: string,
   external_urls: { spotify: string },
-  // genre: string
 }
 
 export interface FormProps {
   getMoodyTunes: Function;
   updateMood: Function;
-  // getGenres: Function;
+  setDecade: Function;
 }
 
 export interface ResultProps {

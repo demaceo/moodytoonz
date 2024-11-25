@@ -1,24 +1,34 @@
 import axios from 'axios';
 import * as base64 from 'base-64';
+import { ISongResults } from '../components/common/Types';
 
 const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID as string;
 const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET as string;
 
+
+export const filterByDecade = (tracks: ISongResults[], decade: string): ISongResults[] => {
+    if (!decade) return tracks; // If no decade is selected, return all tracks.
+
+    const startYear =
+        parseInt(decade) > 20 ? 1900 + parseInt(decade) : 2000 + parseInt(decade);
+    const endYear = startYear + 9;
+    return tracks.filter((track) => {
+        const releaseYear = parseInt(track.album.release_date.split("-")[0]); // Extract the release year from the date.
+        return releaseYear >= startYear && releaseYear <= endYear; // Check if it falls within the decade range.
+    });
+};
+
 const getSpotifyBearerToken = async (clientId: string, clientSecret: string): Promise<string | null> => {
     const tokenUrl = 'https://accounts.spotify.com/api/token';
-
     // Construct base64-encoded client credentials
     const encodedCredentials = base64.encode(`${clientId}:${clientSecret}`);
-
     const headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': `Basic ${encodedCredentials}`,
     };
-
     const data = new URLSearchParams({
         grant_type: 'client_credentials',
     }).toString();
-
     try {
         // Send the POST request to get the token
         const response = await axios.post(tokenUrl, data, { headers });
@@ -47,7 +57,7 @@ const getRecommendations = async (
             },
             params: {
                 seed_genres: seedGenresQuery,
-                limit: 40,
+                limit: 99,
                 market: "US",
                 min_valence: minValence,
                 max_valence: maxValence,
