@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import Form from "../Form/Form";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import { fetchRecommendations } from "../../utilities/apiRequests";
+import {
+  fetchRecommendations,
+  filterByDecade,
+} from "../../utilities/apiRequests";
 import ResultsView from "../ResultsView/ResultsView";
 import FavoritesView from "../FavoritesView/FavoritesView";
 import { ISongResults, MoodData } from "../common/Types";
@@ -11,10 +14,12 @@ import NavBar from "../NavBar/NavBar";
 import { moodsData } from "../common/moods.js";
 
 function App() {
-  const [songResults, setSongResults] = useState([]);
+  // const [songResults, setSongResults] = useState<ISongResults[]>([]);
   const [favoriteSongs, setFavoriteSongs] = useState<ISongResults[]>([]);
   const [localStorage, setLocalStorage] = useLocalStorage("favorites");
   const [moodName, setMoodName] = useState("");
+  const [decade, setDecade] = useState("");
+  const [finalResults, setFinalResults] = useState<any[]>([]);
 
   useEffect(() => {
     let storedFavs: any = localStorage;
@@ -29,6 +34,21 @@ function App() {
     return genreList ? genreList.seed_genres : undefined;
   };
 
+  const addUniqueSongs = (newSongs: any[]) => {
+    const seenIds = new Set();
+    // Filter out songs with duplicate IDs
+    const filteredSongs = newSongs.filter((song) => {
+      if (seenIds.has(song.id)) {
+        return false;
+      }
+      seenIds.add(song.id);
+      return true;
+    });
+
+    // Add the unique songs to finalResults
+    setFinalResults((prevResults) => [...prevResults, ...filteredSongs]);
+  };
+
   const getMoodyTunes = async (mood: string, moodName: string) => {
     const [minValence, maxValence, minEnergy, maxEnergy] = mood
       .split(",")
@@ -36,15 +56,25 @@ function App() {
 
     const genres: string[] | undefined = getGenres(moodName);
 
-    const results = await fetchRecommendations(
-      minValence,
-      maxValence,
-      minEnergy,
-      maxEnergy,
-      genres
-    );
+    let allResults: ISongResults[] = [];
+    // Keep fetching until we get at least 50 results
+    while (allResults.length < 30) {
+      const initialResults = await fetchRecommendations(
+        minValence,
+        maxValence,
+        minEnergy,
+        maxEnergy,
+        genres
+      );
+      const filteredResults = filterByDecade(initialResults, decade);
+      allResults = [...allResults, ...filteredResults];
 
-    setSongResults(results);
+      // add some delay to avoid overwhelming the API
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }
+
+    // Update the finalResults state with the accumulated results
+    setFinalResults(allResults);
   };
 
   const updateMoodName = (moodWord: string) => {
@@ -53,10 +83,12 @@ function App() {
 
   const clearMoodName = () => {
     setMoodName("");
+    setDecade("");
+    setFinalResults([]);
   };
 
   const addFavorite = (id: string) => {
-    const favorite = songResults.find(
+    const favorite = finalResults.find(
       (song: ISongResults) => song.id === id
     ) as any;
     if (favoriteSongs === undefined) {
@@ -72,13 +104,12 @@ function App() {
     const favorites = favoriteSongs.filter(
       (song: ISongResults) => song.id !== id
     ) as any;
-    console.log('favorites', favorites);
     setFavoriteSongs(favorites);
     setLocalStorage(favorites);
   };
 
   const checkSongResults = () => {
-    if (!songResults) {
+    if (!finalResults) {
       return (
         <h2>
           Sorry, there are no results for that selection.
@@ -86,16 +117,16 @@ function App() {
           <p>Click the "Home" or "back" button to try again.</p>
         </h2>
       );
-    } else if (songResults.length) {
+    } else if (finalResults.length) {
       return (
         <ResultsView
           addFavorite={addFavorite}
-          songResults={songResults}
+          songResults={finalResults}
           moodName={moodName}
           favoriteSongs={favoriteSongs as any}
         />
       );
-    } else if (!songResults.length) {
+    } else if (!finalResults.length) {
       return (
         <h2>
           <br />
@@ -123,7 +154,11 @@ function App() {
         <Route
           path="/"
           element={
-            <Form getMoodyTunes={getMoodyTunes} updateMood={updateMoodName} />
+            <Form
+              getMoodyTunes={getMoodyTunes}
+              updateMood={updateMoodName}
+              setDecade={setDecade}
+            />
           }
         />
       </Routes>
