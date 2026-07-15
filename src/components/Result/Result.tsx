@@ -81,13 +81,6 @@ const Result = ({
     }
   };
 
-  // const searchSpotify = (songUrl?: string) => {
-  //   let searchParams = `${name}  artist:${artist}`;
-  //   songUrl
-  //     ? window.open(songUrl)
-  //     : window.open(`https://open.spotify.com/search/${searchParams}`);
-  // };
-
   const capitalize = (songInfo: string) => {
     return songInfo
       .split(" ")

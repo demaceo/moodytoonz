@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Form from "../Form/Form";
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import {
-  fetchRecommendations,
-  filterByDecade,
-} from "../../utilities/apiRequests";
+import { fetchSongsForMood } from "../../utilities/apiRequests";
 import ResultsView from "../ResultsView/ResultsView";
 import FavoritesView from "../FavoritesView/FavoritesView";
 import { ISongResults, MoodData } from "../common/Types";
@@ -14,12 +11,16 @@ import NavBar from "../NavBar/NavBar";
 import { moodsData } from "../common/moods.js";
 
 function App() {
-  // const [songResults, setSongResults] = useState<ISongResults[]>([]);
   const [favoriteSongs, setFavoriteSongs] = useState<ISongResults[]>([]);
   const [localStorage, setLocalStorage] = useLocalStorage("favorites");
   const [moodName, setMoodName] = useState("");
   const [decade, setDecade] = useState("");
-  const [finalResults, setFinalResults] = useState<any[]>([]);
+  const [finalResults, setFinalResults] = useState<ISongResults[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  // Bumped on every new fetch/reset so a late-resolving stale request can't
+  // overwrite results from a mood the user has since navigated away from.
+  const latestRequestId = useRef(0);
 
   useEffect(() => {
     let storedFavs: any = localStorage;
@@ -34,47 +35,30 @@ function App() {
     return genreList ? genreList.seed_genres : undefined;
   };
 
-  const addUniqueSongs = (newSongs: any[]) => {
-    const seenIds = new Set();
-    // Filter out songs with duplicate IDs
-    const filteredSongs = newSongs.filter((song) => {
-      if (seenIds.has(song.id)) {
-        return false;
+  const getMoodyTunes = async (moodWord: string) => {
+    const requestId = ++latestRequestId.current;
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const songs = await fetchSongsForMood(getGenres(moodWord), decade);
+      if (requestId === latestRequestId.current) {
+        setFinalResults(songs);
       }
-      seenIds.add(song.id);
-      return true;
-    });
-
-    // Add the unique songs to finalResults
-    setFinalResults((prevResults) => [...prevResults, ...filteredSongs]);
-  };
-
-  const getMoodyTunes = async (mood: string, moodName: string) => {
-    const [minValence, maxValence, minEnergy, maxEnergy] = mood
-      .split(",")
-      .map(Number);
-
-    const genres: string[] | undefined = getGenres(moodName);
-
-    let allResults: ISongResults[] = [];
-    // Keep fetching until we get at least 50 results
-    while (allResults.length < 30) {
-      const initialResults = await fetchRecommendations(
-        minValence,
-        maxValence,
-        minEnergy,
-        maxEnergy,
-        genres
-      );
-      const filteredResults = filterByDecade(initialResults, decade);
-      allResults = [...allResults, ...filteredResults];
-
-      // add some delay to avoid overwhelming the API
-      await new Promise((resolve) => setTimeout(resolve, 500));
+    } catch (err) {
+      if (requestId === latestRequestId.current) {
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Something went wrong fetching songs."
+        );
+        setFinalResults([]);
+      }
+    } finally {
+      if (requestId === latestRequestId.current) {
+        setIsLoading(false);
+      }
     }
-
-    // Update the finalResults state with the accumulated results
-    setFinalResults(allResults);
   };
 
   const updateMoodName = (moodWord: string) => {
@@ -82,22 +66,26 @@ function App() {
   };
 
   const clearMoodName = () => {
+    latestRequestId.current++; // invalidate any in-flight fetch
     setMoodName("");
     setDecade("");
     setFinalResults([]);
+    setIsLoading(false);
+    setError(null);
   };
 
   const addFavorite = (id: string) => {
-    const favorite = finalResults.find(
-      (song: ISongResults) => song.id === id
-    ) as any;
-    if (favoriteSongs === undefined) {
-      setFavoriteSongs([favorite]);
-      setLocalStorage(favoriteSongs);
-    } else if (!favoriteSongs.includes(favorite)) {
-      setFavoriteSongs([favorite, ...favoriteSongs]);
-      setLocalStorage([favorite, ...favoriteSongs]);
-    }
+    const favorite = finalResults.find((song: ISongResults) => song.id === id);
+    if (!favorite) return;
+    setFavoriteSongs((prevFavorites) => {
+      const currentFavorites = prevFavorites ?? [];
+      if (currentFavorites.some((song) => song.id === favorite.id)) {
+        return currentFavorites;
+      }
+      const updated = [favorite, ...currentFavorites];
+      setLocalStorage(updated);
+      return updated;
+    });
   };
 
   const removeFavorite = (id: string) => {
@@ -109,24 +97,7 @@ function App() {
   };
 
   const checkSongResults = () => {
-    if (!finalResults) {
-      return (
-        <h2>
-          Sorry, there are no results for that selection.
-          <br />
-          <p>Click the "Home" or "back" button to try again.</p>
-        </h2>
-      );
-    } else if (finalResults.length) {
-      return (
-        <ResultsView
-          addFavorite={addFavorite}
-          songResults={finalResults}
-          moodName={moodName}
-          favoriteSongs={favoriteSongs as any}
-        />
-      );
-    } else if (!finalResults.length) {
+    if (isLoading) {
       return (
         <h2>
           <br />
@@ -135,6 +106,43 @@ function App() {
         </h2>
       );
     }
+
+    if (error) {
+      return (
+        <h2>
+          {error}
+          <br />
+          <p>
+            <button
+              className="submit-button"
+              onClick={() => getMoodyTunes(moodName)}
+            >
+              Try Again
+            </button>
+          </p>
+          <p>Or click the "Home" button to pick a different mood.</p>
+        </h2>
+      );
+    }
+
+    if (finalResults.length) {
+      return (
+        <ResultsView
+          addFavorite={addFavorite}
+          songResults={finalResults}
+          moodName={moodName}
+          favoriteSongs={favoriteSongs as any}
+        />
+      );
+    }
+
+    return (
+      <h2>
+        Sorry, there are no results for that selection.
+        <br />
+        <p>Click the "Home" or "back" button to try again.</p>
+      </h2>
+    );
   };
 
   return (

@@ -55,9 +55,7 @@ There's more info under here about the functionality being described!
 
 The homepage provides users with a simple form to collect user's mood and music decade. Local storage allows a user to retain their 'favorites', so users have the option of viewing their favorites without going through the music recommendation flow. 
 
-Music recommendations are gathered using the [Musicovery API](http://b2b.musicovery.com/). The API draws on a database of music where each track has assigned to it 'mood' values, which consist of two parameters - 'arousal' and 'valence'. These two parameters are based on research around mapping emotion on a circumplex model as seen below. Currently we have set canned values, however in the future we'd like to map emotion to all values and use sliders to adjust valence/arousal.
-
-![circumplex space model](https://user-images.githubusercontent.com/66697338/104362520-21fc1a00-54d1-11eb-9f31-b1e269504019.png)
+Music recommendations are gathered directly from the [Spotify Web API](https://developer.spotify.com/documentation/web-api). Each mood maps to a small set of Spotify genre seeds (see `src/components/common/moods.js`); selecting a mood searches Spotify's catalog for tracks tagged with those genres, optionally narrowed to a chosen decade via release year. (An earlier version of this app used the Musicovery API's valence/arousal mood model through a small proxy server; that backend has since been removed and the app now talks to Spotify directly from the browser.)
 
 <details>
   <summary>**Under the Hood**</summary>
@@ -128,8 +126,6 @@ Favorites are populated with any results that have been added to the favorites. 
 
 #### Future
 
-* Dynamic range of valence/arousal that will translate to a mood
-* Implementation of Spotify's actual API to interact with Spotify account
 * Find songs similar to the mood of x song
 
 ## Team

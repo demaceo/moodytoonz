@@ -1,5 +1,7 @@
-//! https://developer.spotify.com/documentation/web-api/reference/get-recommendations
-//! to add min and max for energy, valence, danceability, etc
+// target_valence/target_energy describe intended mood characteristics but aren't sent to
+// Spotify: the Recommendations/Audio Features endpoints that accepted them were restricted
+// to legacy-access apps in Nov 2024. Only seed_genres (via the Search API's genre filter,
+// see apiRequests.ts) drive the actual query today.
 
 // const allGenres = [
 //   'acoustic',
@@ -189,7 +191,7 @@ export const moodsData = [
     mood: 'Dreamy',
     target_valence: [0.4, 0.8],
     target_energy: [0.2, 0.5],
-    seed_genres: ['dream pop', 'ambient', 'shoegaze']
+    seed_genres: ['ambient', 'chill', 'indie-pop']
   },
   // {
   //   mood: 'Nostalgic',
@@ -219,15 +221,7 @@ export const moodsData = [
     mood: 'Peaceful',
     target_valence: [0.4, 0.8],
     target_energy: [0.1, 0.3],
-    seed_genres: [
-      'classical',
-      'new age',
-      'ambient',
-      'world',
-      'sleep',
-      'chill',
-      'indie'
-    ]
+    seed_genres: ['classical', 'new-age', 'ambient', 'sleep', 'chill']
   }
   // {
   //   mood: 'Hypnotic',

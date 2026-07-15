@@ -28,11 +28,11 @@ const ResultsView = ({
       <Result
         key={`${song.id}-${song.name}`}
         id={song.id}
-        artist={song["artists"][0].name}
-        name={song["name"]}
-        releaseDate={song.album.release_date}
-        url={song.external_urls["spotify"]}
-        img={song.album.images[0]["url"]}
+        artist={song.artists?.[0]?.name ?? "Unknown Artist"}
+        name={song.name}
+        releaseDate={song.album?.release_date ?? ""}
+        url={song.external_urls?.spotify ?? ""}
+        img={song.album?.images?.[0]?.url ?? ""}
         favoriteSongs={favoriteSongs}
         addFavorite={addFavorite}
       />
