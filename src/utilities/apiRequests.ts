@@ -6,8 +6,11 @@ const clientId = process.env.REACT_APP_SPOTIFY_CLIENT_ID as string;
 const clientSecret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET as string;
 
 const REQUEST_TIMEOUT_MS = 8000;
-const MAX_SEARCH_ATTEMPTS = 8;
-const RESULTS_PER_SEARCH = 50;
+// Spotify's Feb 2026 policy change capped /v1/search's `limit` at 10 (was 50) for
+// Development Mode apps; MAX_SEARCH_ATTEMPTS is raised to compensate so a mood still
+// reaches TARGET_RESULT_COUNT via more, smaller pages rather than fewer, larger ones.
+const MAX_SEARCH_ATTEMPTS = 20;
+const RESULTS_PER_SEARCH = 10;
 export const TARGET_RESULT_COUNT = 30;
 
 export class SpotifyRequestError extends Error {
