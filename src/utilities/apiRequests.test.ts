@@ -79,7 +79,10 @@ describe("fetchSongsForMood", () => {
     mockedAxios.get.mockImplementation(async () => {
       attempt++;
       if (attempt === 1) {
-        throw { isAxiosError: true, response: { status: 500 } };
+        throw Object.assign(new Error("simulated failure"), {
+          isAxiosError: true,
+          response: { status: 500 },
+        });
       }
       return { data: { tracks: { items: [track("only-track", "2020-01-01")] } } };
     });
