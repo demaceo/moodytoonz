@@ -22,13 +22,12 @@ import {
 } from "../../utilities/icons";
 
 const Form = ({ getMoodyTunes, updateMood, setDecade }: FormProps) => {
-  const [mood, setMood] = useState<string | null>(null);
   const [moodName, setMoodName] = useState("");
   const [decade, setLocalDecade] = useState("");
 
   const handleClick = () => {
-    if (mood) {
-      getMoodyTunes(mood, moodName);
+    if (moodName) {
+      getMoodyTunes(moodName);
       updateMood(moodName);
     }
   };
@@ -43,24 +42,20 @@ const Form = ({ getMoodyTunes, updateMood, setDecade }: FormProps) => {
   };
 
   const handleMood = (moodWord: string) => {
-    const moodObj = moodsData.find(
+    const moodExists = moodsData.some(
       (item) => item.mood.toLowerCase() === moodWord.toLowerCase()
     );
-    if (moodObj) {
-      const { target_valence, target_energy } = moodObj;
-      setMood(
-        `${target_valence[0]},${target_valence[1]},${target_energy[0]},${target_energy[1]}`
-      );
+    if (moodExists) {
       setMoodName(moodWord);
     }
   };
 
   const disableLink = () => {
-    return mood ? "submit-link" : "disabled-link";
+    return moodName ? "submit-link" : "disabled-link";
   };
 
   const showActive = () => {
-    return mood ? "submit-button" : "submit-button-inactive";
+    return moodName ? "submit-button" : "submit-button-inactive";
   };
 
   return (

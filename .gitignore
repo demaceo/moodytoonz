@@ -1,13 +1,5 @@
 node_modules
+build
 
 .env
 .env.local
-
-#Testing
-App.test.tsx
-Favorite.test.tsx
-FavoritesView.test.tsx
-Form.test.tsx
-NavBar.test.tsx
-Result.test.tsx
-ResultsView.test.tsx

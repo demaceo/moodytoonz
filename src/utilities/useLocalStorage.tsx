@@ -10,9 +10,13 @@ export const useLocalStorage = <T,>(
   initialValue?: T
 ): ReturnType<T> => {
   const [state, setState] = useState<T | undefined>(() => {
-    if (!initialValue) {
-      const value = localStorage.getItem(key);
-      return value ? JSON.parse(value) : console.log("no items in storage");
+    const stored = localStorage.getItem(key);
+    if (!stored) return initialValue;
+    try {
+      return JSON.parse(stored);
+    } catch (err) {
+      console.error(`Failed to parse stored value for "${key}":`, err);
+      return initialValue;
     }
   });
 
@@ -21,7 +25,7 @@ export const useLocalStorage = <T,>(
       try {
         localStorage.setItem(key, JSON.stringify(state));
       } catch (err) {
-        console.log(err);
+        console.error(`Failed to persist "${key}" to localStorage:`, err);
       }
     }
   }, [state, key]);

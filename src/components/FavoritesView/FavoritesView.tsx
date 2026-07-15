@@ -28,18 +28,16 @@ const FavoritesView = ({
       </section>
     );
   } else {
-    console.log(favoriteSongs);
-    const favorites = favoriteSongs.map((...fav: any) => {
+    const favorites = favoriteSongs.map((fav) => {
       return (
         <Favorite
-          key={`${fav[0]["id"]}1`}
-          id={fav[0]["id"]}
-          artist={fav[0]["artists"][0].name}
-          name={fav[0]["name"]}
-          releaseDate={fav[0]["album"]["release_date"]}
-          // genre={fav.genre}
-          url={fav[0].external_urls["spotify"]}
-          img={fav[0].album.images[0]["url"]}
+          key={`${fav.id}1`}
+          id={fav.id}
+          artist={fav.artists?.[0]?.name ?? "Unknown Artist"}
+          name={fav.name}
+          releaseDate={fav.album?.release_date ?? ""}
+          url={fav.external_urls?.spotify ?? ""}
+          img={fav.album?.images?.[0]?.url ?? ""}
           favoriteSongs={favoriteSongs}
           removeFavorite={removeFavorite}
         />
